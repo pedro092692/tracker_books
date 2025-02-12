@@ -20,5 +20,11 @@
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/pedro092692/tracker_books/issues"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "ejs": "^3.1.10",
+    "express": "^4.21.2",
+    "pg": "^8.13.2"
   }
 }

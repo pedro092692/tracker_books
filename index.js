@@ -9,3 +9,22 @@
 // 6. New books notes.
 // 7. Using this api to get books info https://openlibrary.org/dev/docs/api/covers
 
+//imports 
+import express from 'express';
+import bodyParser from 'body-parser';
+import pg from 'pg';
+
+// set up app
+const app = express();
+const port = 3000;
+
+
+app.get('/', (req, res) => {
+    res.render('index.ejs');
+});
+
+
+//start server 
+app.listen(port, (erro) => {
+    console.log(`Server is running at http://localhost:${port}`);
+})
