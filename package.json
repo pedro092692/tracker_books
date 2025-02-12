@@ -1,13 +1,24 @@
 {
   "name": "capstone-project-book-notes",
   "version": "1.0.0",
-  "description": "",
+  "description": "This app track your reading books, complete boock list and rate each one.",
   "main": "index.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pedro092692/tracker_books.git"
+  },
+  "keywords": [
+    "books",
+    "library",
+    "lifestyle"
+  ],
+  "author": "pedro bastidas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pedro092692/tracker_books/issues"
+  }
 }
