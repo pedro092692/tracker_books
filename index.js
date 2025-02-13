@@ -12,16 +12,49 @@
 //imports 
 import express from 'express';
 import bodyParser from 'body-parser';
+import axios from 'axios';
 import pg from 'pg';
 
 // set up app
 const app = express();
 const port = 3000;
+const API_URL = 'https://openlibrary.org/'
+
+//middlewere 
+app.use(express.static('public'));
 
 
-app.get('/', (req, res) => {
-    res.render('index.ejs');
+app.get('/', async(req, res) => {
+    const books = await searchBook('python', 8);
+    const booksInfo = books.docs;
+    booksInfo.forEach((book, index) => {
+        if(book.cover_i){
+            booksInfo[index]['imgUrl'] = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+        }
+    });
+    // console.log(booksInfo);
+    res.render('index.ejs', {
+        books: booksInfo
+    });
 });
+
+
+// function request for a book 
+async function searchBook(query, limit){
+    const headers = {
+        'User-Agent': "book_tracker_app/1.0 (pedro092692@gmail.com)"
+    }
+    // make url for search 
+    const url = API_URL + `search.json?q=${query.replace(' ', '+')}&limit=${limit}`
+    try{
+        const response = await axios.get(url, {
+            headers: headers
+        });
+        return response.data;
+    }catch(error){
+        console.log('Faile to make request:', error);
+    }
+}
 
 
 //start server 

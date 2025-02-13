@@ -1,5 +1,26 @@
 <%- include('partials/header.ejs')  %>
 
 <h1>Welcome to book tracker app</h1>
+<h2>Here some books you may like</h2>
+
+<% books.forEach((book) =>{ %>
+    <img src="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>" alt="book cover" width="180">
+    <h3>Book title: <%= book.title %> </h3>
+    <% if(book.author_name) { %>
+        <ul>
+            <% for(var authorName of book.author_name) { %>
+                <li><%= authorName %></li>
+            <% } %>
+        </ul>
+    <% }else{ %>
+        No author info.
+    <% } %>
+    <h4>First publish year</h4>
+    <%=  book.first_publish_year  %>
+    <h4>Editions</h4>
+    <%=  book.edition_count  %>
+    <hr>
+    <br>
+<% }) %>
 
 <%- include('partials/footer.ejs')  %>
