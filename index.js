@@ -15,10 +15,14 @@ import bodyParser from 'body-parser';
 import axios from 'axios';
 import pg from 'pg';
 
+
 // set up app
 const app = express();
 const port = 3000;
 const API_URL = 'https://openlibrary.org/'
+const headers = {
+    'User-Agent': "book_tracker_app/1.0 (pedro092692@gmail.com)"
+}
 
 //middlewere 
 app.use(express.static('public'));
@@ -41,16 +45,16 @@ app.get('/', async(req, res) => {
 app.post('/save', async(req, res) => {
     const bookName = req.body.name;
     const bookImg = req.body.imageURL;
-    const bookInfo = req.body.workId;
-    const bookCoverI = req.body.coverI;
+    const workId = req.body.workId;
+    const bookKey = req.body.key;
+    const bookNumberPages = 0;
+    //get books page if there if coverI 
+    if(bookKey){
+        const bookPages = await bookInfo('books', bookKey);
+        bookNumberPages = bookPages.number_of_pages;
+    }
+    //save data to data base
     
-    //get books info 
-    console.log(
-        bookName,
-        bookImg,
-        bookInfo,
-        bookCoverI
-    );
     res.sendStatus(200);
 
 });
@@ -58,9 +62,7 @@ app.post('/save', async(req, res) => {
 
 // function request search for a book 
 async function searchBook(query, limit){
-    const headers = {
-        'User-Agent': "book_tracker_app/1.0 (pedro092692@gmail.com)"
-    }
+    
     // make url for search 
     const url = API_URL + `search.json?q=${query.replace(' ', '+')}&limit=${limit}`
     try{
@@ -72,6 +74,21 @@ async function searchBook(query, limit){
         console.log('Faile to make request:', error);
     }
 }
+
+//function request openlibrary 
+async function bookInfo(endPoint, query){
+    try{
+        const response = await axios.get(
+            `${API_URL}${endPoint}/${query}.json`, {
+                headers: headers
+            }
+        );
+        return response.data;
+    }catch(error){
+        console.log('Faile to make request:', error);
+    }
+    
+} 
 
 
 //start server 

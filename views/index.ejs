@@ -25,7 +25,7 @@
         <input type="hidden" name="workId" value="<%= book.key %>">
         <input type="hidden" name="name" value="<%= book.title %>">
         <input type="hidden" name="imageURL" value="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>">
-        <input type="hidden" name="coverI" value="<%= book.cover_i ? book.cover_i : null %>">
+        <input type="hidden" name="key" value="<%= book.cover_edition_key ? book.cover_edition_key : null %>">
         <input type="submit" value="Add this book to my library">
     </form>
     <hr>
