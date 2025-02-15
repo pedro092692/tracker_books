@@ -22,24 +22,41 @@ const API_URL = 'https://openlibrary.org/'
 
 //middlewere 
 app.use(express.static('public'));
+app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.get('/', async(req, res) => {
-    const books = await searchBook('python', 8);
+    const books = await searchBook('ahorrar y ', 8);
     const booksInfo = books.docs;
     booksInfo.forEach((book, index) => {
         if(book.cover_i){
             booksInfo[index]['imgUrl'] = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
         }
     });
-    // console.log(booksInfo);
     res.render('index.ejs', {
         books: booksInfo
     });
 });
 
+app.post('/save', async(req, res) => {
+    const bookName = req.body.name;
+    const bookImg = req.body.imageURL;
+    const bookInfo = req.body.workId;
+    const bookCoverI = req.body.coverI;
+    
+    //get books info 
+    console.log(
+        bookName,
+        bookImg,
+        bookInfo,
+        bookCoverI
+    );
+    res.sendStatus(200);
 
-// function request for a book 
+});
+
+
+// function request search for a book 
 async function searchBook(query, limit){
     const headers = {
         'User-Agent': "book_tracker_app/1.0 (pedro092692@gmail.com)"
