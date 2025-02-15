@@ -42,7 +42,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 
 app.get('/', async(req, res) => {
-    const books = await searchBook('ahorrar y ', 8);
+    const books = await searchBook('python', 8);
     const booksInfo = books.docs;
     booksInfo.forEach((book, index) => {
         if(book.cover_i){
@@ -59,15 +59,20 @@ app.post('/save', async(req, res) => {
     const bookImg = req.body.imageURL;
     const workId = req.body.workId;
     const bookKey = req.body.key;
-    const bookNumberPages = 0;
+    let bookNumberPages = 0;
     //get books page if there if coverI 
     if(bookKey){
         const bookPages = await bookInfo('books', bookKey);
         bookNumberPages = bookPages.number_of_pages;
     }
-    //save data to data base
-
-    res.sendStatus(200);
+    //save data to data base name, url, review_note, pages
+    await addBook([bookName, bookImg, 0.0, bookNumberPages]);
+    if(addBook){
+        console.log('Book added to library');
+        res.redirect('/');
+    }else{
+        res.sendStatus(500);
+    }
 
 });
 
@@ -101,6 +106,18 @@ async function bookInfo(endPoint, query){
     }
     
 } 
+
+//save new book function 
+async function addBook(data){
+    try{
+        const query = await db.query(
+            "INSERT INTO books(name, url, review_note, pages) VALUES($1, $2, $3, $4)", data
+        );
+        return true;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
 
 
 //start server 
