@@ -24,6 +24,18 @@ const headers = {
     'User-Agent': "book_tracker_app/1.0 (pedro092692@gmail.com)"
 }
 
+// database 
+const db = new pg.Client({
+    user: 'postgres', 
+    host: 'localhost',
+    database: 'library',
+    password: '12345678',
+    port: 5432,
+});
+
+// connect data base
+db.connect();
+
 //middlewere 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}));
@@ -54,7 +66,7 @@ app.post('/save', async(req, res) => {
         bookNumberPages = bookPages.number_of_pages;
     }
     //save data to data base
-    
+
     res.sendStatus(200);
 
 });
