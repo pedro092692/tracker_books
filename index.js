@@ -63,6 +63,7 @@ app.get('/', async(req, res) => {
     });
 });
 
+// save book in database 
 app.post('/save', async(req, res) => {
     const bookName = req.body.name;
     const bookImg = req.body.imageURL;
@@ -88,6 +89,12 @@ app.post('/save', async(req, res) => {
     }
 });
 
+//view book more info 
+app.get('/book/:bookId', async(req, res) => {
+    
+    res.render('book.ejs');
+
+});
 
 // function request search for a book 
 async function searchBook(query, limit){
