@@ -19,6 +19,10 @@
     <%=  book.first_publish_year  %>
     <h4>Editions</h4>
     <%=  book.edition_count  %>
+    
+    <% if(book.error) { %>
+        <p><%= book.error %></p>
+    <% } %>
     <br>
     <!-- add book library -->
     <form action="/save" method="POST">

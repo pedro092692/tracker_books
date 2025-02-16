@@ -10,7 +10,7 @@
 // 7. Using this api to get books info https://openlibrary.org/dev/docs/api/covers
 
 //imports 
-import express from 'express';
+import express, { query } from 'express';
 import bodyParser from 'body-parser';
 import axios from 'axios';
 import pg from 'pg';
@@ -33,6 +33,9 @@ const db = new pg.Client({
     port: 5432,
 });
 
+// error 
+let error;
+
 // connect data base
 db.connect();
 
@@ -46,11 +49,17 @@ app.get('/', async(req, res) => {
     const booksInfo = books.docs;
     booksInfo.forEach((book, index) => {
         if(book.cover_i){
-            booksInfo[index]['imgUrl'] = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`
+            booksInfo[index]['imgUrl'] = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
         }
+        if(error){
+            if(book.key === error.id){
+                booksInfo[index]['error'] = error.message;
+            }
+        }
+
     });
     res.render('index.ejs', {
-        books: booksInfo
+        books: booksInfo,
     });
 });
 
@@ -66,14 +75,17 @@ app.post('/save', async(req, res) => {
         bookNumberPages = bookPages.number_of_pages;
     }
     //save data to data base name, url, review_note, pages
-    await addBook([bookName, bookImg, 0.0, bookNumberPages]);
-    if(addBook){
-        console.log('Book added to library');
+    const result = await addBook([bookName, bookImg, 0.0, bookNumberPages, workId], res);
+    if(result){
+        console.log('add book');
         res.redirect('/');
     }else{
-        res.sendStatus(500);
+        error = {
+            message: 'Sorry this book is already added to the library',
+            id: workId,
+        }
+        res.redirect('/');
     }
-
 });
 
 
@@ -111,7 +123,7 @@ async function bookInfo(endPoint, query){
 async function addBook(data){
     try{
         const query = await db.query(
-            "INSERT INTO books(name, url, review_note, pages) VALUES($1, $2, $3, $4)", data
+            "INSERT INTO books(name, url, review_note, pages, work_id) VALUES($1, $2, $3, $4, $5)", data
         );
         return true;
     }catch(err){
