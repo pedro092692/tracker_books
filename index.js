@@ -56,7 +56,6 @@ app.get('/', async(req, res) => {
                 booksInfo[index]['error'] = error.message;
             }
         }
-
     });
     res.render('index.ejs', {
         books: booksInfo,
@@ -91,8 +90,35 @@ app.post('/save', async(req, res) => {
 
 //view book more info 
 app.get('/book/:bookId', async(req, res) => {
-    
-    res.render('book.ejs');
+    const bookId = req.params.bookId;
+    let bookDescription = '';
+    // get more info about book 
+    const  moreInfo = await bookInfo('works', bookId);
+    if(moreInfo){
+        // get book description check if description if type object or string
+        if(typeof(moreInfo.description) === 'object'){
+            console.log(moreInfo.description);
+            bookDescription = moreInfo.description.value;
+        }else{
+            bookDescription = moreInfo.description;
+        }
+        // get book info from daba base 
+        const result = await saveBookInfo(`/works/${bookId}`);
+        const bookTitle = result[0].name;
+        const bookImgURL = result[0].url;
+        const bookPages = result[0].pages;
+
+        // render view 
+        res.render('book.ejs', {
+            name: bookTitle,
+            imgURL: bookImgURL,
+            pages: bookPages,
+            description: bookDescription,
+        });
+    }else{
+        res.sendStatus(404);
+    }
+
 
 });
 
@@ -133,6 +159,16 @@ async function addBook(data){
             "INSERT INTO books(name, url, review_note, pages, work_id) VALUES($1, $2, $3, $4, $5)", data
         );
         return true;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
+
+// read book function 
+async function saveBookInfo(bookId){
+    try{
+        const query = await db.query('SELECT * FROM books WHERE work_id = $1', [bookId]);
+        return query.rows;
     }catch(err){
         console.log('Error executing query:', err);
     }

@@ -4,7 +4,9 @@
 <h2>Here some books you may like</h2>
 
 <% books.forEach((book) =>{ %>
-    <img src="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>" alt="book cover" width="180">
+    <a href="/book/<%= book.key.split('/')[2] %>">
+        <img src="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>" alt="book cover" width="180">
+    </a>
     <h3>Book title: <%= book.title %> </h3>
     <% if(book.author_name) { %>
         <ul>
