@@ -13,7 +13,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {searchBook, bookInfo} from './request.js';
-import {addBook, saveBookInfo} from './db.js';
+import {addBook, saveBookInfo, librarayBooks} from './db.js';
 
 
 
@@ -30,7 +30,12 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //index view 
 app.get('/', async(req, res) => {
-    res.render('index.ejs');
+    // check if there are books in database 
+    const userBooks = await librarayBooks();
+    console.log(userBooks);
+    res.render('index.ejs', {
+        books: userBooks,
+    });
 });
 
 

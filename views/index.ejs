@@ -5,4 +5,16 @@
         <input type="search" name="query" id="query" placeholder="harry potter and the philosopher's stone">
         <input type="submit" value="Search book">
     </form>
+    <% if(books){ %>
+        <ul>
+            <% books.forEach((book) => { %>
+                <a href="/book/<%= book.work_id.split('/')[2] %>">
+                    <li>
+                        <img src="<%= book.url %>" alt="book cover img" height="40">
+                        <h3><%= book.name %></h3>
+                    </li>
+                </a>
+            <% }) %>
+        </ul>
+    <% } %>
 <%- include('partials/footer.ejs')  %>

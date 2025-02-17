@@ -33,3 +33,13 @@ export async function saveBookInfo(bookId){
         console.log('Error executing query:', err);
     }
 }
+
+// list library added books
+export async function librarayBooks(){
+    try{
+        const query = await db.query('SELECT * FROM books ORDER BY review_note DESC');
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
