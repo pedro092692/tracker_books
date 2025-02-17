@@ -54,6 +54,7 @@ app.post('/search', async(req, res) => {
             }
         }
     });
+    console.log(bookInfo.length);
     res.render('search.ejs', {
         books: booksInfo,
     });
