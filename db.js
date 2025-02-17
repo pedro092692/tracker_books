@@ -53,3 +53,33 @@ export async function updateBook(data){
         console.log('Error executing query:', err);
     }
 }
+
+//check for pages read book 
+export async function readBooks(bookId){
+    try{
+        const query = await db.query('SELECT * FROM percent_read WHERE book_id = $1', [bookId]);
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
+
+//insert new pages read 
+export async function addReadPage(bookId, page){
+    try{
+        const query = await db.query('INSERT INTO percent_read(book_id, pages_read) VALUES($1, $2)', [bookId, page]);
+        return query.rows;
+    }catch(err){
+        consoele.log('Error executing query:', err);
+    }
+}
+
+//update pages read of book 
+export async function updatePageBook(bookId, page){
+    try{
+        const query = await db.query('UPDATE percent_read SET pages_read  = $1 WHERE book_id = $2', [page, bookId]);
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}

@@ -13,7 +13,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {searchBook, bookInfo} from './request.js';
-import {addBook, saveBookInfo, librarayBooks, updateBook} from './db.js';
+import {addBook, saveBookInfo, librarayBooks, updateBook, updatePageBook, readBooks, addReadPage} from './db.js';
 
 
 // set up app
@@ -36,7 +36,6 @@ app.get('/', async(req, res) => {
         books: userBooks,
     });
 });
-
 
 // search book view
 app.post('/search', async(req, res) => {
@@ -138,6 +137,22 @@ app.post('/book/update', async(req, res) => {
         res.sendStatus(500);
     }
     
+});
+
+//app / update read pages of book 
+app.post('/pages/read', async(req, res) => {
+    console.log(req.body);
+    // check if book already has read pages 
+    const bookIsRead = await readBooks(req.body.bookId);
+    if(bookIsRead.length > 0){
+        //update number pagese
+        const updatePage = await updatePageBook(req.body.bookId, req.body.nPages);
+        res.redirect(`/book/${req.body.workId}`);
+    }else{
+        //insert number pages 
+        const addPage = await addReadPage(req.body.bookId, req.body.nPages);
+        res.redirect(`/book/${req.body.workId}`);
+    }   
 });
 
 //start server 
