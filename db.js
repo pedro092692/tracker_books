@@ -43,3 +43,13 @@ export async function librarayBooks(){
         console.log('Error executing query:', err);
     }
 }
+
+//update book 
+export async function updateBook(data){
+    try{
+        const query = await db.query('UPDATE books SET review_note = $3, pages = $2, read = $4 WHERE id = $1', data);
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}

@@ -1,20 +1,19 @@
 // ------- PROJECT REQUIREMENTS  ------- \\
 
 // Make tracks books app for review your favorites books and add notes 
-// 1. Add new book for read. (add total pages and paged red show percent)
-// 2. Add score to read book. 
+// 1. Add new book for read. ✅ (add total pages and paged red show percent)
+// 2. Add score to read book. ✅
 // 3. Add notes to a book once read books
-// 4. Sort books by score.
+// 4. Sort books by score. ✅
 // 5. Sort books by read and not reads. 
 // 6. New books notes.
-// 7. Using this api to get books info https://openlibrary.org/dev/docs/api/covers
+// 7. Using this api to get books info https://openlibrary.org/dev/docs/api/covers ✅
 
 //imports 
 import express from 'express';
 import bodyParser from 'body-parser';
 import {searchBook, bookInfo} from './request.js';
-import {addBook, saveBookInfo, librarayBooks} from './db.js';
-
+import {addBook, saveBookInfo, librarayBooks, updateBook} from './db.js';
 
 
 // set up app
@@ -32,7 +31,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('/', async(req, res) => {
     // check if there are books in database 
     const userBooks = await librarayBooks();
-    console.log(userBooks);
+    
     res.render('index.ejs', {
         books: userBooks,
     });
@@ -44,6 +43,7 @@ app.post('/search', async(req, res) => {
     const query = req.body.query;
     const books = await searchBook(query, 8);
     const booksInfo = books.docs;
+    // add for each book cover url img 
     booksInfo.forEach((book, index) => {
         if(book.cover_i){
             booksInfo[index]['imgUrl'] = `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg`;
@@ -71,8 +71,8 @@ app.post('/save', async(req, res) => {
         const bookPages = await bookInfo('books', bookKey);
         bookNumberPages = bookPages.number_of_pages;
     }
-    //save data to data base name, url, review_note, pages
-    const result = await addBook([bookName, bookImg, 0.0, bookNumberPages, workId], res);
+    //save data to database name, url, review_note, pages
+    const result = await addBook([bookName, bookImg, 0.0, bookNumberPages, workId]);
     if(result){
         console.log('add book');
         res.redirect('/');
@@ -104,6 +104,7 @@ app.get('/book/:bookId', async(req, res) => {
         const bookTitle = result[0].name;
         const bookImgURL = result[0].url;
         const bookPages = result[0].pages;
+        const bookScore = result[0].review_note;
 
         // render view 
         res.render('book.ejs', {
@@ -111,10 +112,31 @@ app.get('/book/:bookId', async(req, res) => {
             imgURL: bookImgURL,
             pages: bookPages,
             description: bookDescription,
+            score: bookScore,
+            read: result[0].read,
+            id: result[0].id,
+            workId: bookId,
         });
     }else{
         res.sendStatus(404);
     }
+});
+
+//update book info 
+app.post('/book/update', async(req, res) => {
+    let read = false;
+    
+    if(req.body.read){
+        read = true;
+    }
+
+    const result = await updateBook([req.body.bookId, req.body.pages, req.body.score, read]);
+    if(result){
+        res.redirect(`/book/${req.body.workId}`)
+    }else{
+        res.sendStatus(500);
+    }
+    
 });
 
 //start server 

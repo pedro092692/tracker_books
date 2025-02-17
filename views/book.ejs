@@ -3,6 +3,23 @@
     <h1><%= name %></h1>
     <img src="<%= imgURL  %>" alt="">
     <p><%= description %></p>
-    <p>Number of pages: <%= pages %></p>
-
+    
+    <form action="/book/update" method="POST">
+        <input type="hidden" name="bookId" value="<%= id %>">
+        <input type="hidden" name="workId" value="<%= workId %>">
+        <div>
+            <input type="number" name="pages" id="pages" value="<%= pages %>" step="1">
+        </div>
+        <div>
+          <input type="checkbox" id="read" name="read" <%= read ? 'checked' : '' %> />
+          <label for="subscribeNews">I already comple this book.</label>
+        </div>
+        <div>
+            <input type="number" name="score" id="score" value="<%= score %>" step="0.1" max="10">
+        </div>
+        <div>
+          <button type="submit">Save Book</button>
+        </div>
+    </form>
+      
 <%- include('partials/footer.ejs') %>

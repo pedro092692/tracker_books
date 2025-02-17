@@ -2,6 +2,7 @@
 
 CREATE TABLE books(
     id SERIAL PRIMARY KEY,
+    workd_id VARCHAR UNIQUE,
     name TEXT NOT NULL,
     url TEXT NOT NULL,
     review_note FLOAT DEFAULT 0, 
