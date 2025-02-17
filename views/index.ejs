@@ -14,6 +14,7 @@
                         <h3><%= book.name %></h3>
                     </li>
                 </a>
+                <p>Percent read: <%= ((book.pages_read*100) / (book.pages ? book.pages : 1)).toFixed(2)  %>%</p>
             <% }) %>
         </ul>
     <% } %>

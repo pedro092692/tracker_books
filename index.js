@@ -1,7 +1,7 @@
 // ------- PROJECT REQUIREMENTS  ------- \\
 
 // Make tracks books app for review your favorites books and add notes 
-// 1. Add new book for read. ✅ (add total pages and paged red show percent)
+// 1. Add new book for read. ✅ (add total pages and paged red show percent) ✅
 // 2. Add score to read book. ✅
 // 3. Add notes to a book once read books
 // 4. Sort books by score. ✅
@@ -31,7 +31,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('/', async(req, res) => {
     // check if there are books in database 
     const userBooks = await librarayBooks();
-    
     res.render('index.ejs', {
         books: userBooks,
     });
@@ -53,7 +52,6 @@ app.post('/search', async(req, res) => {
             }
         }
     });
-    console.log(bookInfo.length);
     res.render('search.ejs', {
         books: booksInfo,
     });
@@ -74,7 +72,6 @@ app.post('/save', async(req, res) => {
     //save data to database name, url, review_note, pages
     const result = await addBook([bookName, bookImg, 0.0, bookNumberPages, workId]);
     if(result){
-        console.log('add book');
         res.redirect('/');
     }else{
         error = {
@@ -94,7 +91,6 @@ app.get('/book/:bookId', async(req, res) => {
     if(moreInfo){
         // get book description check if description if type object or string
         if(typeof(moreInfo.description) === 'object'){
-            console.log(moreInfo.description);
             bookDescription = moreInfo.description.value;
         }else{
             bookDescription = moreInfo.description;
@@ -105,7 +101,7 @@ app.get('/book/:bookId', async(req, res) => {
         const bookImgURL = result[0].url;
         const bookPages = result[0].pages;
         const bookScore = result[0].review_note;
-
+        console.log(result);
         // render view 
         res.render('book.ejs', {
             name: bookTitle,
@@ -116,6 +112,7 @@ app.get('/book/:bookId', async(req, res) => {
             read: result[0].read,
             id: result[0].id,
             workId: bookId,
+            pages_read: result[0].pages_read,
         });
     }else{
         res.sendStatus(404);
@@ -141,7 +138,6 @@ app.post('/book/update', async(req, res) => {
 
 //app / update read pages of book 
 app.post('/pages/read', async(req, res) => {
-    console.log(req.body);
     // check if book already has read pages 
     const bookIsRead = await readBooks(req.body.bookId);
     if(bookIsRead.length > 0){
