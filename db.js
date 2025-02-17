@@ -37,7 +37,10 @@ export async function saveBookInfo(bookId){
 // list library added books
 export async function librarayBooks(){
     try{
-        const query = await db.query('SELECT * FROM books ORDER BY review_note DESC');
+        const query = await db.query('SELECT books.*, COALESCE(percent_read.pages_read, 0) as pages_read ' + 
+            'FROM books ' +
+            'LEFT JOIN percent_read ON percent_read.book_id = books.id ' +
+            'ORDER BY review_note DESC');
         return query.rows;
     }catch(err){
         console.log('Error executing query:', err);
