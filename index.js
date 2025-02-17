@@ -10,42 +10,34 @@
 // 7. Using this api to get books info https://openlibrary.org/dev/docs/api/covers
 
 //imports 
-import express, { query } from 'express';
+import express from 'express';
 import bodyParser from 'body-parser';
-import axios from 'axios';
-import pg from 'pg';
+import {searchBook, bookInfo} from './request.js';
+import {addBook, saveBookInfo} from './db.js';
+
 
 
 // set up app
 const app = express();
 const port = 3000;
-const API_URL = 'https://openlibrary.org/'
-const headers = {
-    'User-Agent': "book_tracker_app/1.0 (pedro092692@gmail.com)"
-}
-
-// database 
-const db = new pg.Client({
-    user: 'postgres', 
-    host: 'localhost',
-    database: 'library',
-    password: '12345678',
-    port: 5432,
-});
 
 // error 
 let error;
-
-// connect data base
-db.connect();
 
 //middlewere 
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended:true}));
 
-
+//index view 
 app.get('/', async(req, res) => {
-    const books = await searchBook('python', 8);
+    res.render('index.ejs');
+});
+
+
+// search book view
+app.post('/search', async(req, res) => {
+    const query = req.body.query;
+    const books = await searchBook(query, 8);
     const booksInfo = books.docs;
     booksInfo.forEach((book, index) => {
         if(book.cover_i){
@@ -57,7 +49,7 @@ app.get('/', async(req, res) => {
             }
         }
     });
-    res.render('index.ejs', {
+    res.render('search.ejs', {
         books: booksInfo,
     });
 });
@@ -118,64 +110,9 @@ app.get('/book/:bookId', async(req, res) => {
     }else{
         res.sendStatus(404);
     }
-
-
 });
 
-// function request search for a book 
-async function searchBook(query, limit){
-    
-    // make url for search 
-    const url = API_URL + `search.json?q=${query.replace(' ', '+')}&limit=${limit}`
-    try{
-        const response = await axios.get(url, {
-            headers: headers
-        });
-        return response.data;
-    }catch(error){
-        console.log('Faile to make request:', error);
-    }
-}
-
-//function request openlibrary 
-async function bookInfo(endPoint, query){
-    try{
-        const response = await axios.get(
-            `${API_URL}${endPoint}/${query}.json`, {
-                headers: headers
-            }
-        );
-        return response.data;
-    }catch(error){
-        console.log('Faile to make request:', error);
-    }
-    
-} 
-
-//save new book function 
-async function addBook(data){
-    try{
-        const query = await db.query(
-            "INSERT INTO books(name, url, review_note, pages, work_id) VALUES($1, $2, $3, $4, $5)", data
-        );
-        return true;
-    }catch(err){
-        console.log('Error executing query:', err);
-    }
-}
-
-// read book function 
-async function saveBookInfo(bookId){
-    try{
-        const query = await db.query('SELECT * FROM books WHERE work_id = $1', [bookId]);
-        return query.rows;
-    }catch(err){
-        console.log('Error executing query:', err);
-    }
-}
-
-
 //start server 
-app.listen(port, (erro) => {
+app.listen(port, (error) => {
     console.log(`Server is running at http://localhost:${port}`);
 })
