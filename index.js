@@ -17,7 +17,7 @@ import {
             addBook, saveBookInfo, librarayBooks, 
             updateBook, updatePageBook, readBooks, 
             addReadPage, addBookNote, bookNotes,
-            deleteBook
+            deleteBook, bookNote
         } from './db.js';
 
 
@@ -184,6 +184,18 @@ app.post('/book/delete', async(req, res) =>{
     }else{
         res.sendStatus(404);
     }
+});
+
+// book note view 
+app.get('/book/notes/:noteId', async(req, res) =>{
+    const noteId = req.params.noteId;
+    const note = await bookNote(noteId);
+    if(note.length > 0){
+        
+    }else{
+        res.sendStatus(404);
+    }
+    
 });
 
 //start server 

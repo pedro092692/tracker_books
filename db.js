@@ -112,6 +112,16 @@ export async function bookNotes(bookId){
     }
 }
 
+// select note of book 
+export async function bookNote(noteId){
+    try{
+        const query = await db.query("SELECT * FROM book_notes WHERE id = $1", [noteId]);
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
+
 // delete book from library 
 export async function deleteBook(bookId){
     try{

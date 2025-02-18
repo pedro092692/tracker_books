@@ -50,7 +50,9 @@
     <% if(notes.length > 0) { %>
         <ul>
             <% notes.forEach((note) => { %>
-                <li><%= note.date.toLocaleDateString("en-US") %>, <%= note.title %>, <strong>In Page</strong> <%= note.page_ref  %></li>
+                <a href="/book/notes/<%= note.id %>">
+                    <li><%= note.date.toLocaleDateString("en-US") %>, <%= note.title %>, <strong>In Page</strong> <%= note.page_ref  %></li>
+                </a>
             <% }) %>
         </ul>
     <% }else{ %>
