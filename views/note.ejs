@@ -31,6 +31,7 @@
     <!-- delete note form -->
     <form action="/book/note/delete" method="POST" id="deleteNoteForm" style="display: none;" onsubmit="alertDeleteBook(event, this, 'Are you sure to delete this note?')">
         <input type="hidden" name="id" value="<%= id %>">
+        <input type="hidden" name="work_id" value="<%= workId.split('/')[2] %>">
         <input type="submit" value="Delete this note">
     </form>
 <%- include('partials/footer.ejs') %>

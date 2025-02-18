@@ -115,7 +115,7 @@ export async function bookNotes(bookId){
 // select note of book 
 export async function bookNote(noteId){
     try{
-        const query = await db.query("SELECT book_notes.*, books.name, books.url " +  
+        const query = await db.query("SELECT book_notes.*, books.name, books.url, books.work_id " +  
                                      "FROM book_notes " +
                                      "JOIN books ON book_notes.book_id = books.id " +
                                      "WHERE book_notes.id = $1", [noteId]);
@@ -130,6 +130,16 @@ export async function editBookNote(noteId, title, page, note){
     try{
         const query = await db.query("UPDATE book_notes SET title = $2, page_ref = $3, note = $4 WHERE id = $1", [noteId, title, page, note]);
         return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
+
+// delete book note 
+export async function deleteBookNote(noteId){
+    try{
+        const query = await db.query("DELETE FROM book_notes WHERE id = $1", [noteId]);
+        return true;
     }catch(err){
         console.log('Error executing query:', err);
     }
