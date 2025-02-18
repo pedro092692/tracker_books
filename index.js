@@ -16,7 +16,8 @@ import {searchBook, bookInfo} from './request.js';
 import {
             addBook, saveBookInfo, librarayBooks, 
             updateBook, updatePageBook, readBooks, 
-            addReadPage, addBookNote, bookNotes
+            addReadPage, addBookNote, bookNotes,
+            deleteBook
         } from './db.js';
 
 
@@ -171,6 +172,17 @@ app.post('/book/note', async(req, res) =>{
         res.redirect(`/book/${workId}`);
     }else{
         res.sendStatus(500);
+    }
+});
+
+//delete book of the user library
+app.post('/book/delete', async(req, res) =>{
+    const bookId = req.body.bookId;
+    const deleteLibraryBook = await deleteBook(bookId);
+    if(deleteLibraryBook){
+        res.redirect('/')
+    }else{
+        res.sendStatus(404);
     }
 });
 

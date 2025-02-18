@@ -111,3 +111,13 @@ export async function bookNotes(bookId){
         console.log('Error executing query:', err);
     }
 }
+
+// delete book from library 
+export async function deleteBook(bookId){
+    try{
+        const query = await db.query("DELETE FROM books WHERE id = $1", [bookId]);
+        return true;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
