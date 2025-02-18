@@ -1,24 +1,36 @@
 <%- include('partials/header.ejs') %>
+
     <img src="<%= imgURL  %>" alt="book cover" height="50">
     <h1><%= book %></h1>
-    <h2><%= title %></h2>
-    <p>On page: <%= page  %></p>
-    <h2>Note</h2>
-    <p><%= note  %></p>
-    <button id="editNote" onclick="">
-        Edit this note.
-    </button>
+    <div id="noteInfo">
+        <h2><%= title %></h2>
+        <p>On page: <%= page  %></p>
+        <h2>Note</h2>
+        <p><%= note  %></p>
+        
+        <button onclick="editNote(true)">
+            Edit this note.
+        </button>
+    </div>
     <!-- edit note form -->
-    <form action="/note/edit" method="POST" style="display: none;">
+    <form action="/note/edit" method="POST" id="editNoteForm" style="display: none;">
         <input type="hidden" name="id" value="<%= id %>">
         <label for="title">Title:</label>
         <input type="text" name="title" value="<%= title %>">
         <label for="page">Page:</label>
         <input type="number" name="page" value="<%= page %>" step="1">
         <label for="note">Note:</label>
-        <textarea name="note">
-            <%= note %>
-        </textarea>
+        <textarea name="note"><%= note %></textarea>
         <input type="submit" value="Edit This note">
+    </form>
+    
+    <button onclick="editNote(false)" id="leaveEdit" style="display: none;">
+        Leave edit note
+    </button>
+
+    <!-- delete note form -->
+    <form action="/book/note/delete" method="POST" id="deleteNoteForm" style="display: none;" onsubmit="alertDeleteBook(event, this, 'Are you sure to delete this note?')">
+        <input type="hidden" name="id" value="<%= id %>">
+        <input type="submit" value="Delete this note">
     </form>
 <%- include('partials/footer.ejs') %>

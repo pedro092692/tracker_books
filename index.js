@@ -17,7 +17,7 @@ import {
             addBook, saveBookInfo, librarayBooks, 
             updateBook, updatePageBook, readBooks, 
             addReadPage, addBookNote, bookNotes,
-            deleteBook, bookNote
+            deleteBook, bookNote, editBookNote
         } from './db.js';
 
 
@@ -204,6 +204,21 @@ app.get('/book/notes/:noteId', async(req, res) =>{
     }
     
 });
+
+// edit book note 
+app.post('/note/edit', async(req, res) => {
+    const noteId = req.body.id; 
+    const title = req.body.title; 
+    const page = parseInt(req.body.page);
+    const note = req.body.note;
+    
+    const edit = editBookNote(noteId, title, page, note.trim());
+    if(edit){
+        res.redirect(`/book/notes/${noteId}`);
+    }else{
+        res.sendStatus(500);
+    }
+}); 
 
 //start server 
 app.listen(port, (error) => {

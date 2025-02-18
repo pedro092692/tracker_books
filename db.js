@@ -125,6 +125,16 @@ export async function bookNote(noteId){
     }
 }
 
+// edit book note 
+export async function editBookNote(noteId, title, page, note){
+    try{
+        const query = await db.query("UPDATE book_notes SET title = $2, page_ref = $3, note = $4 WHERE id = $1", [noteId, title, page, note]);
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
+
 // delete book from library 
 export async function deleteBook(bookId){
     try{

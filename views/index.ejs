@@ -16,7 +16,7 @@
                 </a>
                 <p>Percent read: <%= ((book.pages_read*100) / (book.pages ? book.pages : 1)).toFixed(2)  %>%</p>
                 <!-- delete from library button -->
-                <form action="/book/delete" method="POST" onsubmit="alertDeleteBook(event, this)">
+                <form action="/book/delete" method="POST" onsubmit="alertDeleteBook(event, this, 'Are you sure to delete this book of your library?')">
                     <input type="hidden" name="bookId" value="<%= book.id %>">
                     <input type="submit" value="Delete this book from my library">
                 </form>
