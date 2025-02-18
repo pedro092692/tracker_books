@@ -115,7 +115,10 @@ export async function bookNotes(bookId){
 // select note of book 
 export async function bookNote(noteId){
     try{
-        const query = await db.query("SELECT * FROM book_notes WHERE id = $1", [noteId]);
+        const query = await db.query("SELECT book_notes.*, books.name, books.url " +  
+                                     "FROM book_notes " +
+                                     "JOIN books ON book_notes.book_id = books.id " +
+                                     "WHERE book_notes.id = $1", [noteId]);
         return query.rows;
     }catch(err){
         console.log('Error executing query:', err);

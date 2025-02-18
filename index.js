@@ -191,7 +191,14 @@ app.get('/book/notes/:noteId', async(req, res) =>{
     const noteId = req.params.noteId;
     const note = await bookNote(noteId);
     if(note.length > 0){
-        
+        res.render('note.ejs',{
+            id: note[0].id,
+            note: note[0].note,
+            page: note[0].page_ref,
+            title: note[0].title,
+            book: note[0].name, 
+            imgURL: note[0].url,
+        })
     }else{
         res.sendStatus(404);
     }
