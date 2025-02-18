@@ -101,7 +101,6 @@ app.get('/book/:bookId', async(req, res) => {
         const bookImgURL = result[0].url;
         const bookPages = result[0].pages;
         const bookScore = result[0].review_note;
-        console.log(result);
         // render view 
         res.render('book.ejs', {
             name: bookTitle,
