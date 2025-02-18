@@ -135,7 +135,7 @@ app.post('/book/update', async(req, res) => {
     
 });
 
-//app / update read pages of book 
+//add / update read pages of book 
 app.post('/pages/read', async(req, res) => {
     // check if book already has read pages 
     const bookIsRead = await readBooks(req.body.bookId);
@@ -148,6 +148,12 @@ app.post('/pages/read', async(req, res) => {
         const addPage = await addReadPage(req.body.bookId, req.body.nPages);
         res.redirect(`/book/${req.body.workId}`);
     }   
+});
+
+//add book note
+app.post('/book/note', async(req, res) =>{
+    console.log(req.body);
+    res.sendStatus(200);
 });
 
 //start server 
