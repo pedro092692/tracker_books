@@ -15,7 +15,14 @@
                     </li>
                 </a>
                 <p>Percent read: <%= ((book.pages_read*100) / (book.pages ? book.pages : 1)).toFixed(2)  %>%</p>
+                <!-- delete from library button -->
+                <form action="/book/delete" method="POST">
+                    <input type="hidden" name="bookId" value="<%= book.id %>">
+                    <input type="submit" value="Delete this book from my library">
+                </form>
             <% }) %>
+            
+            <br>
         </ul>
     <% } %>
 <%- include('partials/footer.ejs')  %>
