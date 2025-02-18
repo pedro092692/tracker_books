@@ -30,4 +30,16 @@
         <input type="hidden" name="workId" value=<%= workId  %>>
         <input type="submit" value="Update read pages">
     </form>
+
+    <!-- add note for this book -->
+    <h3>Add note for this book</h3>
+    <form action="/book/note">
+        <input type="hidden" name="bookId" value=<%= id  %>>
+        <input type="hidden" name="workId" value=<%= workId  %>>
+        <label for="page">Add note in page:</label>
+        <input type="number" name="page" id="page" step="1" max="<%= pages  %>">
+        <label for="note">Note</label>
+        <textarea name="note" id="note"></textarea>
+        <input type="submit" value="Save note for this book.">
+    </form>
 <%- include('partials/footer.ejs') %>
