@@ -35,10 +35,34 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //index view 
 app.get('/', async(req, res) => {
+    let userBooks
+
     // check if there are books in database 
-    const userBooks = await librarayBooks();
+    if(Object.keys(req.query).length != 0){
+        console.log(req.query)
+        switch (req.query.filter){
+            case 'noRead':
+                userBooks = await librarayBooks('WHERE read = $1 ', [false]);
+            break;
+
+            case 'read':
+                userBooks = await librarayBooks('WHERE read = $1 ', [true]);
+            break;
+            
+            case 'review':
+                userBooks = await librarayBooks('WHERE 1 = 1 ', [], 'review_note ');
+            break;
+
+            default:
+                userBooks = await librarayBooks();
+        }
+    }else{
+        userBooks = await librarayBooks();
+    }
+    
     res.render('index.ejs', {
         books: userBooks,
+        filter: req.query.filter
     });
 });
 

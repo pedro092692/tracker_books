@@ -27,3 +27,8 @@ function editNote(edit){
     }
     
 }
+
+function filterForm(select){
+    const form = select.parentNode;
+    form.submit();
+}
