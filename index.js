@@ -13,7 +13,11 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import {searchBook, bookInfo} from './request.js';
-import {addBook, saveBookInfo, librarayBooks, updateBook, updatePageBook, readBooks, addReadPage} from './db.js';
+import {
+            addBook, saveBookInfo, librarayBooks, 
+            updateBook, updatePageBook, readBooks, 
+            addReadPage, addBookNote
+        } from './db.js';
 
 
 // set up app
@@ -152,8 +156,18 @@ app.post('/pages/read', async(req, res) => {
 
 //add book note
 app.post('/book/note', async(req, res) =>{
-    console.log(req.body);
-    res.sendStatus(200);
+
+    const bookId = req.body.bookId;
+    const workId = req.body.workId;
+    const noteTitle = req.body.noteTitle;
+    const page = parseInt(req.body.page);
+    const note = req.body.note;
+    const addNote = await addBookNote(bookId, note, page, noteTitle);
+    if(addNote){
+        res.redirect(`/book/${workId}`);
+    }else{
+        res.sendStatus(500);
+    }
 });
 
 //start server 

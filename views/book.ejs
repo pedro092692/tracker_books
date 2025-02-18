@@ -37,11 +37,11 @@
         <input type="hidden" name="bookId" value=<%= id  %>>
         <input type="hidden" name="workId" value=<%= workId  %>>
         <label for="noteTitle">Note Title</label>
-        <input type="text" name="noteTitle" placeholder="Title for this note">
+        <input type="text" name="noteTitle" placeholder="Title for this note" required>
         <label for="page">Add note in page:</label>
-        <input type="number" name="page" id="page" step="1" max="<%= pages  %>">
+        <input type="number" name="page" id="page" step="1" max="<%= pages  %>" required>
         <label for="note">Note</label>
-        <textarea name="note" id="note"></textarea>
+        <textarea name="note" id="note" required></textarea>
         <input type="submit" value="Save note for this book.">
     </form>
 <%- include('partials/footer.ejs') %>

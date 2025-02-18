@@ -89,3 +89,15 @@ export async function updatePageBook(bookId, page){
         console.log('Error executing query:', err);
     }
 }
+
+//add new note to a book 
+export async function addBookNote(bookId, note, page, title){
+    try{
+        const query = await db.query("INSERT INTO book_notes(book_id, note, page_ref, date, title) VALUES($1, $2, $3, $4, $5)", 
+            [bookId, note, page, new Date(), title]
+        );
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}
