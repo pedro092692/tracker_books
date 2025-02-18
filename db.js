@@ -101,3 +101,13 @@ export async function addBookNote(bookId, note, page, title){
         console.log('Error executing query:', err);
     }
 }
+
+// list books notes 
+export async function bookNotes(bookId){
+    try{
+        const query = await db.query("SELECT * FROM book_notes WHERE book_id = $1 ORDER BY id DESC", [bookId]);
+        return query.rows;
+    }catch(err){
+        console.log('Error executing query:', err);
+    }
+}

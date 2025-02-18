@@ -44,4 +44,16 @@
         <textarea name="note" id="note" required></textarea>
         <input type="submit" value="Save note for this book.">
     </form>
+
+    <!-- notes in this book -->
+    <h2>Book Notes:</h2>
+    <% if(notes.length > 0) { %>
+        <ul>
+            <% notes.forEach((note) => { %>
+                <li><%= note.date.toLocaleDateString("en-US") %>, <%= note.title %>, <strong>In Page</strong> <%= note.page_ref  %></li>
+            <% }) %>
+        </ul>
+    <% }else{ %>
+        <p>There aren't notes for this book please add new one.</p>
+    <% } %>
 <%- include('partials/footer.ejs') %>

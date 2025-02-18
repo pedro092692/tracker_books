@@ -3,10 +3,10 @@
 // Make tracks books app for review your favorites books and add notes 
 // 1. Add new book for read. ✅ (add total pages and paged red show percent) ✅
 // 2. Add score to read book. ✅
-// 3. Add notes to a book once read books
+// 3. Add notes to a book once read books ✅
 // 4. Sort books by score. ✅
 // 5. Sort books by read and not reads. 
-// 6. New books notes.
+// 6. New books notes. ✅
 // 7. Using this api to get books info https://openlibrary.org/dev/docs/api/covers ✅
 
 //imports 
@@ -16,7 +16,7 @@ import {searchBook, bookInfo} from './request.js';
 import {
             addBook, saveBookInfo, librarayBooks, 
             updateBook, updatePageBook, readBooks, 
-            addReadPage, addBookNote
+            addReadPage, addBookNote, bookNotes
         } from './db.js';
 
 
@@ -105,6 +105,9 @@ app.get('/book/:bookId', async(req, res) => {
         const bookImgURL = result[0].url;
         const bookPages = result[0].pages;
         const bookScore = result[0].review_note;
+
+        //get book notes 
+        const notes = await bookNotes(result[0].id);
         // render view 
         res.render('book.ejs', {
             name: bookTitle,
@@ -116,6 +119,7 @@ app.get('/book/:bookId', async(req, res) => {
             id: result[0].id,
             workId: bookId,
             pages_read: result[0].pages_read,
+            notes: notes,
         });
     }else{
         res.sendStatus(404);
