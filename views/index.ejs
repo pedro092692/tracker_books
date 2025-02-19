@@ -1,4 +1,11 @@
 <%- include('partials/header.ejs') %>
+    <!-- hero section -->
+    <%- include('partials/hero_section/hero.ejs')  %>
+    <!-- end hero section -->
+
+
+
+    <div style="display: none;">   
     <h1>Welcome to the book manage app</h1>
     <h3>please search a book</h3>
     <form action="/search" method="POST">
@@ -37,4 +44,5 @@
     <% }else{ %>
         <h2>No books please add new one or select other filter.</h2>
     <% } %>
+    </div>
 <%- include('partials/footer.ejs')  %>

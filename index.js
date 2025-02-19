@@ -39,7 +39,6 @@ app.get('/', async(req, res) => {
 
     // check if there are books in database 
     if(Object.keys(req.query).length != 0){
-        console.log(req.query)
         switch (req.query.filter){
             case 'noRead':
                 userBooks = await librarayBooks('WHERE read = $1 ', [false]);
@@ -50,7 +49,7 @@ app.get('/', async(req, res) => {
             break;
             
             case 'review':
-                userBooks = await librarayBooks('WHERE 1 = 1 ', [], 'review_note ');
+                userBooks = await librarayBooks('WHERE 1 = 1 ', [], 'review_note ', 'DESC');
             break;
 
             default:
