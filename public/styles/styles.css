@@ -152,5 +152,39 @@ form button{
     object-fit: cover;
 }
 
+.book form input[type=submit]{
+    border: none;
+    padding: 16px 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    background-color: #BD9AA7;
+    width: 100%;
+    border-radius: 8px;
+    color: #3A3A3A;
+    cursor: pointer;
+}
 
 /* end suggested book section */
+
+/* categories section */
+.categories{
+    padding: 0px 140px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    place-content: center;
+    gap: 32px;
+    background-color: red;
+}
+
+.categories .category{
+    min-height: 160px;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    background-color: blue;
+}
+
+/* end categories section */
