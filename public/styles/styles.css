@@ -1,0 +1,103 @@
+/* hero section */
+.hero{
+    font-family: "IBM Plex Serif", serif;
+    min-height: 92vh;
+    background-image: url('/assets/images/bg.jpg');
+    background-position: center;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 24px;
+}
+
+/* nav styles */
+nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+nav .menu{
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.menu p{
+    text-transform: capitalize;
+    font-weight: 600;
+}
+/* end nax styles */
+
+.hero .content{
+    width: 100%;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: -60px;
+}
+
+.content .message{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.content h1{
+    font-size: 5rem;
+    font-weight: 600;
+    color: #232323;
+}
+
+.content p{
+    color: #3A3A3A;
+    font-size: 0.9rem;
+}
+
+/* search form */
+.content form{
+    display: flex;
+    width: 50%;
+    gap: 8px;
+}
+
+form input[type=search]{
+    flex-grow: 1;
+    padding: 16px 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 4px;
+    transition: all 0.4s ease-in-out;
+}
+
+form input[type=search]:focus{
+    outline: none;
+    box-shadow: 1px 7px 21px -5px rgba(0,0,0,0.58);
+    -webkit-box-shadow: 1px 7px 21px -5px rgba(0,0,0,0.58);
+    -moz-box-shadow: 1px 7px 21px -5px rgba(0,0,0,0.58);
+}
+
+form button{
+    background-color: #BD9AA7;
+    border: none;
+    border-radius: 4px;
+    padding: 4px 16px;
+    cursor: pointer;
+}
+
+
+/* end search form */
+
+/* end hero section */

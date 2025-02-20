@@ -1,21 +1,21 @@
 <section class="hero">
     <!-- nav bar -->
-        <nav>
-            <img src="" alt="app logo">
-        </nav>
-        <div>
-            <p>my books</p>
-        </div>
+    <%- include('../nav.ejs')  %>
     <!-- end nav bar -->
-
     <!-- hero content -->
-        <div>
-            <h1>Search Book</h1>
-            <p>A blank journal opens with dreams of daily musings, but quickly gathers dust in the rush of life.</p>
+        <div class="content">
+            <div class="message">
+                <h1>Search Book</h1>
+                <p>A blank journal opens with dreams of daily musings, but quickly gathers dust in the rush of life.</p>
+            </div>
+            <!-- search form -->
+            <form action="/search" method="POST">
+                <input type="search" name="query" id="query" placeholder="Search Book" required>
+                <button>
+                    <img src="/assets/images/search_icon.svg" alt="search icon" height="24">
+                </button>
+            </form>
+            <!-- end search form -->
         </div>
-        <form action="/search" method="POST">
-            <input type="search" name="query" id="query" placeholder="Search Book">
-            <input type="submit" value="Search book">
-        </form>
     <!-- end hero content -->
 </section>

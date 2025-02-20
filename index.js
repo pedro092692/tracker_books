@@ -12,7 +12,7 @@
 //imports 
 import express from 'express';
 import bodyParser from 'body-parser';
-import {searchBook, bookInfo} from './request.js';
+import {searchBook, bookInfo, randomBook} from './request.js';
 import {
             addBook, saveBookInfo, librarayBooks, 
             updateBook, updatePageBook, readBooks, 
@@ -58,6 +58,9 @@ app.get('/', async(req, res) => {
     }else{
         userBooks = await librarayBooks();
     }
+
+    const suggesBooks = await randomBook();
+    console.log(suggesBooks)
     
     res.render('index.ejs', {
         books: userBooks,

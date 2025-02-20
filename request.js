@@ -38,3 +38,26 @@ export async function bookInfo(endPoint, query){
     }
     
 } 
+
+// function get random book 
+export async function randomBook(){
+    try{
+        const bookList = await bookInfo('people/mekBot/books', 'want-to-read');
+        const randomBooks = []
+        //get three randomBooks 
+        for(var i = 0; i < 3; i++){
+            const selectRandomBook = bookList.reading_log_entries[Math.floor(Math.random() * 100)];
+            randomBooks.push({
+                name: selectRandomBook.work.title,
+                author: selectRandomBook.work.author_names[0],
+                imgURL: `https://covers.openlibrary.org/b/id/${selectRandomBook.work.cover_id}-L.jpg`,
+            });
+        }
+        
+        return randomBooks;
+
+        
+    }catch(error){
+        console.log('Faile to make request:', error);
+    }
+}
