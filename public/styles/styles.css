@@ -101,3 +101,56 @@ form button{
 /* end search form */
 
 /* end hero section */
+
+/* suggested book section */
+.suggested{
+    font-family: "Roboto", serif;
+    display: flex;
+    gap: 32px;
+    justify-content: center;
+    margin-top: -160px;
+    padding-bottom: 64px;
+}
+
+.suggested a{
+    color: inherit;
+    text-decoration: none;
+}
+
+.suggested .book{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 400px;
+    height: 650px;
+}
+
+.suggested .book .bookCover{
+    width: 100%;
+    height: 600px;
+    border-radius: 16px;
+    box-shadow: -1px 1px 14px 2px rgba(0,0,0,0.43);
+    -webkit-box-shadow: -1px 1px 14px 2px rgba(0,0,0,0.43);
+    -moz-box-shadow: -1px 1px 14px 2px rgba(0,0,0,0.43);
+    overflow: hidden;
+}
+
+.book .bookInfo h2{
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.book .bookInfo p{
+    font-size: 1.2rem;
+}
+
+
+.bookCover img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+
+/* end suggested book section */

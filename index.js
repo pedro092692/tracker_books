@@ -60,10 +60,11 @@ app.get('/', async(req, res) => {
     }
 
     const suggesBooks = await randomBook();
-    console.log(suggesBooks)
+    console.log(suggesBooks);
     
     res.render('index.ejs', {
         books: userBooks,
+        suggestedBooks: suggesBooks,
         filter: req.query.filter
     });
 });

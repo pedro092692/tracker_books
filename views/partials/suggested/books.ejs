@@ -1,0 +1,13 @@
+<section class="suggested">
+    <% suggestedBooks.forEach((book) => { %>
+        <div class="book">
+            <div class="bookCover">
+                <img src="<%= book.imgURL %>" alt="book cover">
+            </div>
+            <div class="bookInfo">
+                <h2><%= book.name %></h2>
+                <p><%= book.author  %></p>
+            </div>
+        </div>
+    <% }) %>
+</section>

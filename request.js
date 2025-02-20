@@ -48,6 +48,7 @@ export async function randomBook(){
         for(var i = 0; i < 3; i++){
             const selectRandomBook = bookList.reading_log_entries[Math.floor(Math.random() * 100)];
             randomBooks.push({
+                id: selectRandomBook.work.key.split('/')[2],
                 name: selectRandomBook.work.title,
                 author: selectRandomBook.work.author_names[0],
                 imgURL: `https://covers.openlibrary.org/b/id/${selectRandomBook.work.cover_id}-L.jpg`,
