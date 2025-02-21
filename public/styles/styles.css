@@ -174,7 +174,6 @@ form button{
     grid-template-rows: 1fr;
     place-content: center;
     gap: 32px;
-    background-color: red;
 }
 
 .categories .category{
@@ -185,6 +184,26 @@ form button{
     align-items: center;
     gap: 8px;
     background-color: blue;
+}
+
+.categories .action{
+    background: rgb(131,58,180);
+    background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 50%, rgba(252,176,69,1) 100%);
+}
+
+.categories .love{
+    background: rgb(125,1,212);
+    background: linear-gradient(90deg, rgba(125,1,212,1) 0%, rgba(152,84,84,1) 50%, rgba(199,10,10,1) 100%);
+}
+
+.categories .fiction{
+    background: rgb(127,255,115);
+    background: linear-gradient(90deg, rgba(127,255,115,1) 0%, rgba(202,29,29,1) 50%, rgba(0,65,148,1) 100%);
+}
+
+.categories .kids{
+    background: rgb(255,212,115);
+    background: linear-gradient(90deg, rgba(255,212,115,1) 0%, rgba(233,126,216,1) 50%, rgba(126,179,246,1) 100%);
 }
 
 /* end categories section */
