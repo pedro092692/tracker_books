@@ -1,0 +1,12 @@
+<section class="last_books">
+    <h2>Your last added books</h2>
+    <div class="container_user_books">
+        <% for(var i = 0; i < 7; i++){ %>
+            <div class="book <%= i === 0 ? 'first' : '' %>">
+                
+                <h3><%= books[i].name %></h3>
+                <img src="<%= books[i].url %>" alt="book cover">
+            </div>
+        <% } %>
+    </div>
+</section>

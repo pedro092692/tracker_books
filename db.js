@@ -38,7 +38,7 @@ export async function saveBookInfo(bookId){
 }
 
 // list library added books
-export async function librarayBooks(filter='WHERE 1 = 1 ', data=[], order='name ', mode='ASC'){
+export async function librarayBooks(filter='WHERE 1 = 1 ', data=[], order='id ', mode='DESC'){
     try{
         const query = await db.query('SELECT books.*, COALESCE(percent_read.pages_read, 0) AS pages_read ' + 
             'FROM books ' +

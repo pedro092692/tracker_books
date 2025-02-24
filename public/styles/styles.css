@@ -229,3 +229,28 @@ form button{
 }
 
 /* end categories section */
+
+/* user books section */
+.last_books{
+    background-color: red;
+    padding: 32px 140px;
+}
+
+.last_books .container_user_books{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 32px;
+    background-color: pink;
+    justify-content: center;
+}
+
+.container_user_books .book{
+    background-color: blue;
+}
+
+.container_user_books .first{
+    grid-area: 1/1/3/3;
+    min-height: 480px;
+}
+/* end user books section */
