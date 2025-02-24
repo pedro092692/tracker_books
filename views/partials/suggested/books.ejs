@@ -2,7 +2,7 @@
     <% suggestedBooks.forEach((book) => { %>
         <div class="book">
             <div class="bookCover">
-                <img src="<%= book.imgURL %>" alt="book cover">
+                <img src="<%= book.imgURL %>" loading="lazy" alt="book cover">
             </div>
             <div class="bookInfo">
                 <h2><%= book.name %></h2>
