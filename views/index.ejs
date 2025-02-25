@@ -13,16 +13,6 @@
 
 
     <div style="display: none;">
-    <!-- filter book -->
-    <form action="/" method="GET">
-        <label for="filter">Filter your book</label>
-        <select name="filter" id="filter" onchange="filterForm(this)"> 
-            <option value="name">Name</option>
-            <option value="noRead"<%= filter === 'noRead' ? 'selected' : '' %>>No Read books</option>
-            <option value="read"<%= filter === 'read' ? 'selected' : '' %>>Read books</option>
-            <option value="review" <%= filter === 'review' ? 'selected' : '' %>>Best Score</option>
-        </select>
-    </form>
     <% if(books){ %>
         <ul>
             <% books.forEach((book) => { %>

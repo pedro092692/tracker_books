@@ -1,6 +1,17 @@
 <%- include('partials/header.ejs') %>
     <section class="user_books">
         <h1>Library Books</h1>
+        <!-- filter book -->
+        <form action="/mybooks" method="GET">
+            <label for="filter">Filter your book</label>
+            <select name="filter" id="filter" onchange="filterForm(this)">
+                <option value="">Latest additions</option> 
+                <option value="name" <%= filter === 'name' ? 'selected' : '' %>>Name</option>
+                <option value="noRead"<%= filter === 'noRead' ? 'selected' : '' %>>No Read books</option>
+                <option value="read"<%= filter === 'read' ? 'selected' : '' %>>Read books</option>
+                <option value="review" <%= filter === 'review' ? 'selected' : '' %>>Best Score</option>
+            </select>
+        </form>
         <div class="book_grid">
             <% books.forEach((book) => { %>
                 <div class="book">

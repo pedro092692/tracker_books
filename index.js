@@ -42,7 +42,6 @@ app.get('/', async(req, res) => {
     res.render('index.ejs', {
         books: userBooks,
         suggestedBooks: suggesBooks,
-        filter: req.query.filter,
         reqURL: '/'
     });
 });
@@ -65,6 +64,10 @@ app.get('/mybooks', async(req, res) => {
                 userBooks = await librarayBooks('WHERE 1 = 1 ', [], 'review_note ', 'DESC');
             break;
 
+            case 'name':
+                userBooks = await librarayBooks('WHERE 1 = 1 ', [], 'name ', 'ASC');
+            break;
+
             default:
                 userBooks = await librarayBooks();
         }
@@ -73,6 +76,7 @@ app.get('/mybooks', async(req, res) => {
     }
     res.render('user_books.ejs', {
         books: userBooks,
+        filter: req.query.filter,
     })
 });
 
