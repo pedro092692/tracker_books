@@ -34,7 +34,7 @@ nav .menu{
     text-transform: capitalize;
     font-weight: 600;
 }
-/* end nax styles */
+/* end nav styles */
 
 .hero .content{
     width: 100%;
@@ -313,3 +313,55 @@ footer .footer_contaier{
 
 
 /* end footer section */
+
+/* mobile styles */
+
+/* tablets and mid screens */
+@media (min-width:900px) and (max-width:1300px){
+    /* suggested book section */
+    .suggested .book{
+        height: 560px;
+        width: 260px;
+    }
+}
+
+/* cellphones */
+@media (max-width: 900px){
+    /* nav styles and hero section */
+    nav{
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .content h1{
+        font-size: 3.2rem;
+    }
+    
+    .content p{
+        color: #3A3A3A;
+        font-size: 0.9rem;
+    }
+    
+    /* search form */
+    .content form{
+        width: 100%;
+    }
+
+    /* suggested book section */
+    .suggested{
+        justify-content: start;
+        padding: 24px;
+        overflow: scroll;
+    }
+}
+
+/* cellphones  rotate*/
+@media (max-height: 500px){
+    .suggested{
+        margin-top: -40px;
+    }     
+}
+
+
+
+/* mobile styles */
