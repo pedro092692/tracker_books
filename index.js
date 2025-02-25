@@ -260,6 +260,11 @@ app.post('/book/note/delete', async(req, res) => {
     }
 });
 
+// 404 Middleware 
+app.use((req, res, next) =>{
+    res.status(404).render('partials/404.ejs');
+});
+
 //start server 
 app.listen(port, (error) => {
     console.log(`Server is running at http://localhost:${port}`);

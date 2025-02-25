@@ -1,3 +1,9 @@
+body{
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
 /* hero section */
 .hero{
     font-family: "IBM Plex Serif", serif;
@@ -314,6 +320,11 @@ footer .footer_contaier{
 
 /* end footer section */
 
+ /* 404 page */
+ .content_not_found{
+    flex-grow: 1;
+}
+
 /* mobile styles */
 
 /* tablets and mid screens */
@@ -388,12 +399,15 @@ footer .footer_contaier{
         
     }
 
-    .first{
-        display: none;
+    .container_user_books .first{
+        grid-area: unset !important;
+        min-width: auto;
+        min-height: auto;
     }
 
-    footer{
-        display: none;
+    /* footer */
+    footer .footer_contaier{
+        flex-direction: column;
     }
 }
 
@@ -404,6 +418,17 @@ footer .footer_contaier{
     }     
 }
 
+/* user books section mid screens */
+@media (min-width: 900px) and (max-width: 1500px){
+    .container_user_books .book{
+        min-width: 100px;
+        
+    }
 
+    .container_user_books .first{
+        width: 250px;
+        height: 350px;
+    }
+}
 
 /* mobile styles */
