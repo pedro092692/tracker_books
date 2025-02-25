@@ -68,6 +68,11 @@ app.get('/', async(req, res) => {
     });
 });
 
+//user books view
+app.get('/mybooks', async(req, res) => {
+    res.render('user_books.ejs')
+});
+
 // search book view
 app.post('/search', async(req, res) => {
     const query = req.body.query;
