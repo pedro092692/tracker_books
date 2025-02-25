@@ -18,4 +18,11 @@
     <title>Book tracker app</title>
 </head>
 <body>
+    <% if(locals.reqURL){ %>
+        <!-- hero section -->
+        <%- include('hero_section/hero.ejs')  %>
+        <!-- end hero section -->
+    <% }else{ %>
+        <%- include('nav.ejs')  %>
+    <% } %>
     

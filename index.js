@@ -36,7 +36,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 //index view 
 app.get('/', async(req, res) => {
     let userBooks
-
     // check if there are books in database 
     if(Object.keys(req.query).length != 0){
         switch (req.query.filter){
@@ -64,7 +63,8 @@ app.get('/', async(req, res) => {
     res.render('index.ejs', {
         books: userBooks,
         suggestedBooks: suggesBooks,
-        filter: req.query.filter
+        filter: req.query.filter,
+        reqURL: '/'
     });
 });
 
