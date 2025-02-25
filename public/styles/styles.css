@@ -353,6 +353,23 @@ footer .footer_contaier{
         padding: 24px;
         overflow: scroll;
     }
+
+    /* category section */
+    .categories{
+        padding: 32px 16px;
+        align-items: center;
+    }
+
+    .categories .container{
+        width: 100%;
+    }
+    .categories h2{
+        font-size: 2.2rem;
+    }
+
+    footer{
+        display: none;
+    }
 }
 
 /* cellphones  rotate*/
