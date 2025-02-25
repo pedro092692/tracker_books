@@ -8,6 +8,30 @@
     background-color: #f5f3f2;
 }
 
+.user_books form{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.user_books form label{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.user_books form select{
+    width: fit-content;
+    padding: 8px;
+    font-size: 1.15rem;
+    padding: 8px;
+    background-color: #fff;
+    border: 1px solid #caced1;
+    border-radius: 0.25rem;
+    color: #000;
+    cursor: pointer;
+}
+
+
 .user_books h1{
     font-size: 3rem;
     font-weight: 600;
