@@ -367,6 +367,31 @@ footer .footer_contaier{
         font-size: 2.2rem;
     }
 
+    /* last books section */
+    .last_books{
+        padding: 32px 16px;
+    }
+    .last_books .title{
+        width: 100%;
+    }
+    .last_books h2{
+        font-size: 2.2rem;
+    }
+
+    .last_books .container_user_books{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .container_user_books .book{
+        width: 155px;
+        height: 240px;
+        
+    }
+
+    .first{
+        display: none;
+    }
+
     footer{
         display: none;
     }
