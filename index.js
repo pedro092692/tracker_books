@@ -77,8 +77,8 @@ app.get('/mybooks', async(req, res) => {
 });
 
 // search book view
-app.post('/search', async(req, res) => {
-    const query = req.body.query;
+app.get('/search', async(req, res) => {
+    const query = req.query.query;
     const books = await searchBook(query, 8);
     const booksInfo = books.docs;
     // add for each book cover url img 
@@ -94,11 +94,13 @@ app.post('/search', async(req, res) => {
     });
     res.render('search.ejs', {
         books: booksInfo,
+        searchQuery: query,
     });
 });
 
 // save book in database 
 app.post('/save', async(req, res) => {
+    const searchQuery = req.body.searchQuery.replace(' ', '+');
     const bookName = req.body.name;
     const bookImg = req.body.imageURL;
     const workId = req.body.workId;
@@ -118,7 +120,7 @@ app.post('/save', async(req, res) => {
             message: 'Sorry this book is already added to the library',
             id: workId,
         }
-        res.redirect('/');
+        res.redirect('/' + `search?query=${searchQuery}`);
     }
 });
 
