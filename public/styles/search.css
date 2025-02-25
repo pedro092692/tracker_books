@@ -1,0 +1,44 @@
+.search_results{
+    font-family: "Roboto", serif;
+    flex-grow: 1;
+    padding: 40px 32px;
+}
+
+.search_results .search_grid{
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.search_results .bookInfoSearch{
+    display: flex;
+    gap: 24px;
+}
+
+.search_results .bookCoverSearch{
+    height: 360px;
+    width: 240px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.bookCoverSearch img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.bookInfoSearch .bookDetailsInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.bookDetailsInfo h3{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.bookDetailsInfo ul{
+    padding-left: 8px;
+}

@@ -1,42 +1,52 @@
 <%- include('partials/header.ejs')  %>
+<section class="search_results">
+    <% if(books.length > 0){ %>
+        <div class="search_grid">
+            <% books.forEach((book) =>{ %>
+                <div class="bookInfoSearch">
+                    <div class="bookCoverSearch">
+                        <img src="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>" alt="book cover">  
+                    </div>
+                    <div class="bookDetailsInfo">
+                        <h3><%= book.title %> </h3>
+                        <% if(book.author_name) { %>
+                            <h3>Authors:</h3>
+                            <ul>
+                                <% for(var authorName of book.author_name) { %>
+                                    <li><%= authorName %></li>
+                                <% } %>
+                            </ul>
+                        <% }else{ %>
+                            No author info.
+                        <% } %>
+                    </div>
+                    <div>
+                        <h4>First publish year</h4>
+                        <%=  book.first_publish_year  %>
+                    </div>
+                    <div>
+                        <h4>Editions</h4>
+                        <%=  book.edition_count  %>
+                    </div>
+                    <% if(book.error) { %>
+                        <p><%= book.error %></p>
+                    <% } %>
+                    <!-- add book library -->
+                    <form action="/save" method="POST">
+                        <input type="hidden" name="workId" value="<%= book.key %>">
+                        <input type="hidden" name="searchQuery" value="<%= searchQuery %>">
+                        <input type="hidden" name="name" value="<%= book.title %>">
+                        <input type="hidden" name="imageURL" value="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>">
+                        <input type="hidden" name="key" value="<%= book.cover_edition_key ? book.cover_edition_key : null %>">
+                        <input type="submit" value="Add this book to my library">
+                    </form>
+                </div>  
+            <% }) %>
+        </div>
+    <% }else{ %>
+        Sorry no result for your query terms.
+    <% } %>
+</section>
 
-<h1>Welcome to book tracker app</h1>
-<% if(books.length > 0){ %>
-    <h2>Here some books you may like</h2>
-    <% books.forEach((book) =>{ %>
-        <img src="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>" alt="book cover" width="180">
-        <h3>Book title: <%= book.title %> </h3>
-        <% if(book.author_name) { %>
-            <ul>
-                <% for(var authorName of book.author_name) { %>
-                    <li><%= authorName %></li>
-                <% } %>
-            </ul>
-        <% }else{ %>
-            No author info.
-        <% } %>
-        <h4>First publish year</h4>
-        <%=  book.first_publish_year  %>
-        <h4>Editions</h4>
-        <%=  book.edition_count  %>
-        
-        <% if(book.error) { %>
-            <p><%= book.error %></p>
-        <% } %>
-        <br>
-        <!-- add book library -->
-        <form action="/save" method="POST">
-            <input type="hidden" name="workId" value="<%= book.key %>">
-            <input type="hidden" name="searchQuery" value="<%= searchQuery %>">
-            <input type="hidden" name="name" value="<%= book.title %>">
-            <input type="hidden" name="imageURL" value="<%= book.imgUrl ? book.imgUrl : '/assets/images/no_cover.png' %>">
-            <input type="hidden" name="key" value="<%= book.cover_edition_key ? book.cover_edition_key : null %>">
-            <input type="submit" value="Add this book to my library">
-        </form>
-        <hr>
-        <br>
-    <% }) %>
-<% }else{ %>
-    Sorry no result for your query terms.
-<% } %>
+
 <%- include('partials/footer.ejs')  %>
