@@ -1,0 +1,79 @@
+.user_books{
+    flex-grow: 1;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    font-family: "Roboto", serif;
+    background-color: #f5f3f2;
+}
+
+.user_books h1{
+    font-size: 3rem;
+    font-weight: 600;
+}
+
+.user_books .book_grid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 32px;
+}
+
+.book_grid .book{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.book .library_book_cover{
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    border-radius: 16px;
+    box-shadow: -1px 1px 8px 2px rgba(0,0,0,0.43);
+    -webkit-box-shadow: -1px 1px 8px 2px rgba(0,0,0,0.43);
+    -moz-box-shadow: -1px 1px 8px 2px rgba(0,0,0,0.43);
+    overflow: hidden;
+    transition: all 0.4s ease-in-out;
+}
+
+.library_book_cover:hover{
+    box-shadow: -1px 1px 14px 2px rgba(240, 176, 176, 0.43);
+    -webkit-box-shadow: -1px 1px 14px 2px rgba(240, 176, 176, 0.43);
+    -moz-box-shadow: -1px 1px 14px 2px rgba(240, 176, 176, 0.43);
+}
+
+.book .book_info{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    gap: 8px;
+}
+
+.book_info p{
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.book_info .percent{
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+.library_book_cover a{
+    flex-grow: 1;
+}
+
+.library_book_cover img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+
+}
+
+.book_info .percent_bar{
+    background-color: green;
+    width: 1%;
+    height: 4px;
+    border-radius: 24px;
+}

@@ -35,6 +35,20 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //index view 
 app.get('/', async(req, res) => {
+    const userBooks = await librarayBooks();
+
+    const suggesBooks = await randomBook();
+    
+    res.render('index.ejs', {
+        books: userBooks,
+        suggestedBooks: suggesBooks,
+        filter: req.query.filter,
+        reqURL: '/'
+    });
+});
+
+//user books view
+app.get('/mybooks', async(req, res) => {
     let userBooks
     // check if there are books in database 
     if(Object.keys(req.query).length != 0){
@@ -57,20 +71,9 @@ app.get('/', async(req, res) => {
     }else{
         userBooks = await librarayBooks();
     }
-
-    const suggesBooks = await randomBook();
-    
-    res.render('index.ejs', {
+    res.render('user_books.ejs', {
         books: userBooks,
-        suggestedBooks: suggesBooks,
-        filter: req.query.filter,
-        reqURL: '/'
-    });
-});
-
-//user books view
-app.get('/mybooks', async(req, res) => {
-    res.render('user_books.ejs')
+    })
 });
 
 // search book view
