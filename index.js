@@ -119,7 +119,7 @@ app.post('/save', async(req, res) => {
     //save data to database name, url, review_note, pages
     const result = await addBook([bookName, bookImg, 0.0, bookNumberPages, workId]);
     if(result){
-        res.redirect('/');
+        res.redirect(`/book/${workId.split('/')[2]}`);
     }else{
         error = {
             message: 'Sorry this book is already added to the library',
