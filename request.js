@@ -62,3 +62,12 @@ export async function randomBook(){
         console.log('Faile to make request:', error);
     }
 }
+
+// function select categoies
+export async function bookCategory(){
+    try{
+
+    }catch(error){
+        console.log('Faile to make request:', error);
+    }
+}

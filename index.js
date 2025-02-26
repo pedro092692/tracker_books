@@ -103,6 +103,31 @@ app.get('/search', async(req, res) => {
     });
 });
 
+//categoris books view
+app.get('/category/:category', async(req, res) => {
+     const category = req.params.category;
+     const books = await bookInfo('subjects', category);
+     if(books.work_count >= 1){
+        const bookList = books.works;
+        bookList.slice(0, 10).forEach((book, index) => {
+            console.log(book);
+            if(book.cover_id){
+                bookList[index]['imgUrl'] = `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`;
+            }
+            bookList[index]['author_name'] = [book.authors[0].name];
+
+        });
+        res.render('search.ejs', {
+            books: bookList.slice(0, 10),
+            searchQuery: category,
+        })
+     }else{
+        res.status(404).render('partials/404.ejs');
+     }
+
+    
+});
+
 // save book in database 
 app.post('/save', async(req, res) => {
     const searchQuery = req.body.searchQuery.replace(' ', '+');
