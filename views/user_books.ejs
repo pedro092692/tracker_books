@@ -21,7 +21,7 @@
                         </a>
                     </div>
                     <div class="book_info">
-                        <p><%= book.name %></p>
+                        <p><%= book.name.length > 30 ? book.name.slice(0, 30) + '...' : book.name %></p>
                         <p  class="percent">Percent read: <%= ((book.pages_read * 100) / (book.pages ? book.pages : 1)).toFixed(2)  %>%</p>
                         <% let read_percent = ((book.pages_read * 100) / (book.pages ? book.pages : 1)).toFixed(2) %>
                         <div class="percent_bar" style="width: <% if(read_percent === '0.00'){%>2<%}else{%><%=read_percent%><%}%>%;">

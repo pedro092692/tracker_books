@@ -35,6 +35,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 
 //index view 
 app.get('/', async(req, res) => {
+    error = undefined;
     const userBooks = await librarayBooks();
 
     const suggesBooks = await randomBook();
