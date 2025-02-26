@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('/', async(req, res) => {
     error = undefined;
     const userBooks = await librarayBooks();
-
+    console.log(userBooks.length);
     const suggesBooks = await randomBook();
     
     res.render('index.ejs', {
@@ -110,7 +110,6 @@ app.get('/category/:category', async(req, res) => {
      if(books.work_count >= 1){
         const bookList = books.works;
         bookList.slice(0, 10).forEach((book, index) => {
-            console.log(book);
             if(book.cover_id){
                 bookList[index]['imgUrl'] = `https://covers.openlibrary.org/b/id/${book.cover_id}-M.jpg`;
             }

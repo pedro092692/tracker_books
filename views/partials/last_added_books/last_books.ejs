@@ -4,12 +4,22 @@
             <h2>Your last added books</h2>
         </div>
         <div class="container_user_books">
-            <% for(var i = 0; i < 7; i++){ %>
+            <% if(books.length < 7) { %>
+                <% books.forEach((book, i) => { %>
+                    <div class="book <%= i === 0 ? 'first' : '' %>">
+                        <a href="/book/<%= book.work_id.split('/')[2] %>">
+                            <img class="book_cover" src="<%= book.url %>" alt="book cover">
+                        </a>
+                    </div>
+                <% }) %>
+            <% }else{ %>
+                <% for(var i = 0; i < 7; i++){ %>
                     <div class="book <%= i === 0 ? 'first' : '' %>">
                         <a href="/book/<%= books[i].work_id.split('/')[2] %>">
                             <img class="book_cover" src="<%= books[i].url %>" alt="book cover">
                         </a>
                     </div>
+                <% } %>
             <% } %>
         </div>
     </section>
