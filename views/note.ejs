@@ -1,17 +1,24 @@
 <%- include('partials/header.ejs') %>
-
-    <img src="<%= imgURL  %>" alt="book cover" height="50">
-    <h1><%= book %></h1>
+<section class="notes_in_book">
+    <h1><%= title %></h1>
+    <div class="book_note_cover">
+        <img src="<%= imgURL  %>" alt="book cover" height="240">
+        <h2><%= book %></h2>
+    </div>
     <div id="noteInfo">
         <h2><%= title %></h2>
         <p>On page: <%= page  %></p>
-        <h2>Note</h2>
-        <p><%= note  %></p>
+        <h2>Note:</h2>
+        <p class="note"><%= note  %></p>
         
-        <button onclick="editNote(true)">
+        <button class="edit_note" onclick="editNote(true)">
             Edit this note.
         </button>
     </div>
+    <button onclick="editNote(false)" id="leaveEdit" style="display: none;">
+        Leave edit note
+    </button>
+
     <!-- edit note form -->
     <form action="/note/edit" method="POST" id="editNoteForm" style="display: none;">
         <input type="hidden" name="id" value="<%= id %>">
@@ -23,10 +30,6 @@
         <textarea name="note"><%= note %></textarea>
         <input type="submit" value="Edit This note">
     </form>
-    
-    <button onclick="editNote(false)" id="leaveEdit" style="display: none;">
-        Leave edit note
-    </button>
 
     <!-- delete note form -->
     <form action="/book/note/delete" method="POST" id="deleteNoteForm" style="display: none;" onsubmit="alertDeleteBook(event, this, 'Are you sure to delete this note?')">
@@ -34,4 +37,5 @@
         <input type="hidden" name="work_id" value="<%= workId.split('/')[2] %>">
         <input type="submit" value="Delete this note">
     </form>
+</section>
 <%- include('partials/footer.ejs') %>

@@ -16,12 +16,12 @@ function editNote(edit){
     const leaveEdit = document.getElementById('leaveEdit');
     if(edit){
         divInfo.style.display = 'none';
-        form.style.display = 'block';
+        form.style.display = 'flex';
         leaveEdit.style.display = 'block';
         deleteForm.style.display = 'block';
     }else{
         form.style.display = 'none';
-        divInfo.style.display = 'block';
+        divInfo.style.display = 'flex';
         leaveEdit.style.display = 'none';
         deleteForm.style.display = 'none';
     }
