@@ -222,7 +222,7 @@ app.post('/book/delete', async(req, res) =>{
     const bookId = req.body.bookId;
     const deleteLibraryBook = await deleteBook(bookId);
     if(deleteLibraryBook){
-        res.redirect('/')
+        res.redirect('/mybooks')
     }else{
         res.sendStatus(404);
     }

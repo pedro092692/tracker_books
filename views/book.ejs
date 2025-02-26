@@ -31,7 +31,7 @@
                     <label for="subscribeNews">I already comple this book.</label>
                   </div>
                 <div>
-                  <button type="submit">Update</button>
+                  <button type="submit">Update Book Info</button>
                 </div>
             </form>
              <!-- read pages  -->
@@ -43,58 +43,51 @@
                 <input type="hidden" name="bookId" value=<%= id  %>>
                 <input type="hidden" name="workId" value=<%= workId  %>>
                 <div>
-                    <button type="submit">Update</button>
+                    <button type="submit">Update read pages</button>
                 </div>
+            </form>
+            <!-- delete from library button -->
+            <form action="/book/delete" method="POST" onsubmit="alertDeleteBook(event, this, 'Are you sure to delete this book of your library?')">
+                <input type="hidden" name="bookId" value="<%= id %>">
+                <input class="delete" type="submit" value="Delete this book from my library">
             </form>
         </div>
         <div class="book_notes">
-            <p>book notes</p>
+            <h2>book notes</h2>
+            <!-- add note for this book -->
+            <h3>Add note new for this book</h3>
+            <form action="/book/note" method="POST">
+                <input type="hidden" name="bookId" value=<%= id  %>>
+                <input type="hidden" name="workId" value=<%= workId  %>>
+                <label for="noteTitle">Note Title</label>
+                <input type="text" name="noteTitle" placeholder="Title for this note" required>
+                <label for="page">Add note in page:</label>
+                <input type="number" name="page" id="page" step="1" max="<%= pages  %>" required>
+                <label for="note">Note</label>
+                <textarea name="note" id="note" required></textarea>
+                <input type="submit" value="Save note for this book.">
+            </form>
+            <!-- notes in this book -->
+            <h2>Book Notes:</h2>
+            <% if(notes.length > 0) { %>
+                <ul>
+                    <% notes.forEach((note) => { %>
+                        <a href="/book/notes/<%= note.id %>">
+                            <li><%= note.title %>, <strong>In Page</strong> <%= note.page_ref  %>, <%= note.date.toLocaleDateString("en-US") %></li>
+                        </a>
+                    <% }) %>
+                </ul>
+            <% }else{ %>
+                <p>There aren't notes for this book please add new one.</p>
+            <% } %>
         </div>
     </div>
 
 </section>
 
 <div style="display: none;">
+
     
-    
-
-
-    <!-- read pages  -->
-    <form action="/pages/read" method="POST">
-        <label for="nPages">Number of read pages</label>
-        <input type="number" name="nPages" value="<%= pages_read  %>" step="1" max="<%= pages %>">
-        <input type="hidden" name="bookId" value=<%= id  %>>
-        <input type="hidden" name="workId" value=<%= workId  %>>
-        <input type="submit" value="Update read pages">
-    </form>
-
-    <!-- add note for this book -->
-    <h3>Add note for this book</h3>
-    <form action="/book/note" method="POST">
-        <input type="hidden" name="bookId" value=<%= id  %>>
-        <input type="hidden" name="workId" value=<%= workId  %>>
-        <label for="noteTitle">Note Title</label>
-        <input type="text" name="noteTitle" placeholder="Title for this note" required>
-        <label for="page">Add note in page:</label>
-        <input type="number" name="page" id="page" step="1" max="<%= pages  %>" required>
-        <label for="note">Note</label>
-        <textarea name="note" id="note" required></textarea>
-        <input type="submit" value="Save note for this book.">
-    </form>
-
-    <!-- notes in this book -->
-    <h2>Book Notes:</h2>
-    <% if(notes.length > 0) { %>
-        <ul>
-            <% notes.forEach((note) => { %>
-                <a href="/book/notes/<%= note.id %>">
-                    <li><%= note.date.toLocaleDateString("en-US") %>, <%= note.title %>, <strong>In Page</strong> <%= note.page_ref  %></li>
-                </a>
-            <% }) %>
-        </ul>
-    <% }else{ %>
-        <p>There aren't notes for this book please add new one.</p>
-    <% } %>
 </div>
     
 <%- include('partials/footer.ejs') %>
