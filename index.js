@@ -165,7 +165,7 @@ app.get('/book/:bookId', async(req, res) => {
             notes: notes,
         });
     }else{
-        res.sendStatus(404);
+        res.status(404).render('partials/404.ejs');
     }
 });
 
@@ -243,7 +243,7 @@ app.get('/book/notes/:noteId', async(req, res) =>{
             workId: note[0].work_id,
         })
     }else{
-        res.sendStatus(404);
+        res.status(404).render('partials/404.ejs');
     }
     
 });

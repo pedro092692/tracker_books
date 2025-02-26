@@ -328,7 +328,19 @@ footer .footer_contaier{
 
  /* 404 page */
  .content_not_found{
+    font-family: "Roboto", serif;
     flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    justify-content: center;
+    align-items: center;
+}
+
+.content_not_found h1{
+    font-size: 4rem;
+    font-weight: 600;
+    text-transform: capitalize;
 }
 
 /* mobile styles */
@@ -414,6 +426,16 @@ footer .footer_contaier{
     /* footer */
     footer .footer_contaier{
         flex-direction: column;
+    }
+
+    /* 404 page */
+
+    .content_not_found h1{
+        font-size: 2rem;
+    }
+
+    .content_not_found img{
+        width: 256px;
     }
 }
 
