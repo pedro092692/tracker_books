@@ -1,13 +1,13 @@
--- Book table 
+-- Books table 
 
-CREATE TABLE books(
-    id SERIAL PRIMARY KEY,
-    workd_id VARCHAR UNIQUE,
-    name TEXT NOT NULL,
-    url TEXT NOT NULL,
-    review_note FLOAT DEFAULT 0, 
-    pages INT, 
-    read BOOLEAN DEFAULT false
+CREATE TABLE books (
+    id integer NOT NULL,
+    name text NOT NULL,
+    url text NOT NULL,
+    review_note double precision DEFAULT 0,
+    pages integer,
+    read boolean DEFAULT false,
+    work_id character varying NOT NULL
 );
 
 -- read percent table 

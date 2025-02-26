@@ -134,6 +134,9 @@
 }
 
 .book_notes ul{
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
     padding-left: 16px;
     list-style-type: circle;
 }

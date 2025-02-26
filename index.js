@@ -37,7 +37,6 @@ app.use(bodyParser.urlencoded({extended:true}));
 app.get('/', async(req, res) => {
     error = undefined;
     const userBooks = await librarayBooks();
-    console.log(userBooks.length);
     const suggesBooks = await randomBook();
     
     res.render('index.ejs', {
