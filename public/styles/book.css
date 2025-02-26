@@ -1,0 +1,76 @@
+.userBook{
+    flex-grow: 1;
+    padding: 40px 32px;
+    display: flex;
+    gap: 16px;
+    font-family: "Roboto", serif;
+    background-color: #f5f3f2;
+}
+
+.userBook .book_sections{
+    flex-grow: 1;
+    display: flex;
+}
+
+.userBook .book_cover{
+    width: 400px;
+    height: 560px;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.book_cover img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.userBook .book_info{
+    flex-grow: 1;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 0px 8px;
+    border-right: 1px solid #e1e1e1;
+        
+}
+
+.book_info h1{
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+.book_info p{
+    font-size: 0.9rem;
+    font-weight: 300;
+    line-height: 120%;
+    max-width: 450px;
+}
+
+.userBook .book_notes{
+    width: 50%;
+    padding: 0px 16px;
+}
+
+.book_info form{
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 1.2rem;
+}
+
+.book_info form .book_score, .number_pages{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    gap: 8px;
+}
+
+
+@media (max-width: 900px){
+    .userBook .book_cover{
+        width: 260px;
+        height: 460px;
+    }
+}
