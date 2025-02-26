@@ -1,4 +1,4 @@
-## This is crypto Books tracker app made with js over express.ejs axios, pg and ejs
+## This is the Books tracker app made with js over express.ejs axios, pg and ejs
 
 ## To run this app download it and run the command npm i to install all denpendencies (Is required have node on you computer).
 
